@@ -122,9 +122,9 @@ iq-url = "http://localhost:6275"
 
 heavydb_host = "localhost"
 heavydb_port = 6274
-openai_api_key = "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"
-langsmith_project = "waldrop-box"
-langsmith_api_key = "ls__cf8c2045d0bd4ac09a15befd51d0bdb9"
+openai_api_key = "INSERT_KEY_VALUE_HERE"
+langsmith_project = "INSERT_PROJECT_NAME_HERE"
+langsmith_api_key = "INSERT_KEY_VALUE_HERE"
 conFileEnd
 
 cat > daemon.json <<daemonJson
