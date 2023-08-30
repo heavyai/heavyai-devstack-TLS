@@ -19,10 +19,18 @@ A simple development stack for HeavyAI using docker compose.  It includes two ke
 3. Run the ```installHeavy.sh``` script.  This will create the necessary config files and docker-compose files to stand up the test environment.  For basic usage, you do not need the ```heavyVersions.json``` file at all.  This is only used to load a custom Heavy.AI package.
 4. Launch the environment using the command:
 `docker-compose up -d`
-
-5. Launch a browser pointing at port 8001 on the server and you should be prompted to enter your Heavy.AI license.
-6. You can now open up a jupyter envrionment using the icon in Immerse.
-7. On the first launch of jupyter, enter your user name and no value for password.  This will create a jupyter environment for that user.
+>Optional: Install and configure HeavyConnect for Snowflake.
+> 
+> Run the following commands from within the `heavyai-devstack` directory.
+> ```
+> docker exec -it heavyaiserver /tmp/install_odbc_drivers.sh  
+> ./configHeavyConnect.sh 
+> docker restart heavyaiserver
+> ``` 
+> To configure Snowflake for a client account edit `/var/lib/heavyai/odbc/odbc.ini` on the host machine, specifically the parameters `SERVER` and `ACCOUNT` 
+5. Launch a browser pointing at port 8001 on the server, you should be prompted to enter your Heavy.AI license.
+6. You can now open up a jupyter environment using the icon in Immerse.
+7. On the first launch of jupyter, enter your username and no value for password.  This will create a jupyter environment for that user.
 
 ## Ports
 - This config uses a reverse proxy to route all web traffic through port 8001.  So when you connect to Immerse, you connect on port 8001.  This can certainly be changed, but this is the only port that needs to be externally exposed.  To change this port change the `EXTERNAL_PORT` variable in the `install.sh` script.
