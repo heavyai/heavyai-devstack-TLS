@@ -116,6 +116,15 @@ port = 6273
 servers-json = "/var/lib/heavyai/servers.json"
 frontend = "/opt/heavyai/frontend"
 jupyter-url = "/jupyter"
+iq-url = "http://localhost:6275"
+
+[iq]
+
+heavydb_host = "localhost"
+heavydb_port = 6274
+openai_api_key = "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"
+langsmith_project = "waldrop-box"
+langsmith_api_key = "ls__cf8c2045d0bd4ac09a15befd51d0bdb9"
 conFileEnd
 
 cat > daemon.json <<daemonJson
@@ -138,6 +147,7 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
         "password": "HyperInteractive",
         "enableJupyter": true,
         "feature_flags": {
+            "ui/iq_query_generator": true,
             "ui/default_theme": "dark",
             "ui/enable_new_combo_chart": true,
             "ui/sticky_simple_filter_panel": false,
