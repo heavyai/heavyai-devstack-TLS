@@ -10,6 +10,9 @@ NGINX_CONF_FILE="nginx.conf"
 JUPYTERHUB_CONF_FILE="jupyterhub_config.py"
 DOCKERFILE_FILE="Dockerfile.jupyterhub"
 EXTERNAL_PORT="8001"
+OPENAPI_KEY=""
+LANGSMITH_KEY=""
+LANGSMITH_PROJECT""
 
 createFiles(){
 mkdir -p $CONFIG_TMP
@@ -125,9 +128,9 @@ iq-url = "http://localhost:6275"
 
 heavydb_host = "localhost"
 heavydb_port = 6274
-openai_api_key = "INSERT_KEY_VALUE_HERE"
-langsmith_project = "INSERT_PROJECT_NAME_HERE"
-langsmith_api_key = "INSERT_KEY_VALUE_HERE"
+openai_api_key = "$OPENAPI_KEY"
+langsmith_project = "$LANGSMITH_PROJECT"
+langsmith_api_key = "$LANGSMITH_KEY"
 conFileEnd
 
 cat > daemon.json <<daemonJson
