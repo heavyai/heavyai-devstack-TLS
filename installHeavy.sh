@@ -335,7 +335,7 @@ installFiles(){
   
   sudo mkdir /var/lib/heavyai
   sudo mkdir /var/lib/heavyai/odbc
-  sudo ./configHeavyConnect.sh
+  sudo /home/ubuntu/heavyai-devstack/configHeavyConnect.sh
   sudo chown ubuntu /var/lib/heavyai
   sudo mkdir /var/lib/heavyai/import
   sudo mkdir /var/lib/heavyai/jupyter

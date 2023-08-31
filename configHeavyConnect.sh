@@ -2,7 +2,7 @@
 cat > "/var/lib/heavyai/odbc/odbcinst.ini" <<odbcinstiniEnd
 [ODBC Drivers]
 Snowflake=Installed
-Amazon Redshift (x64)=Installed
+Redshift=Installed
 PostgreSQL=Installed
 
 [Snowflake]
@@ -11,7 +11,7 @@ ConnectFunctions=YYY
 Description=Snowflake DSII
 Driver=/usr/lib/snowflake/odbc/lib/libSnowflake.so
 
-[Amazon Redshift (x64)]
+[Redshift]
 Description=Redshift ODBC driver
 Driver = /opt/amazon/redshiftodbc/lib/64/libamazonredshiftodbc64.so
 
@@ -27,7 +27,7 @@ odbcinstiniEnd
 
 cat > "/var/lib/heavyai/odbc/odbc.ini" <<odbciniEnd
 [ODBC Data Sources]
-Amazon Redshift DSN 64=Amazon Redshift (x64)
+Redshift=Redshift
 Snowflake = Snowflake
 PostgreSQL=PostgreSQL
 
@@ -47,7 +47,7 @@ Database=postgres
 Servername=localhost
 Port=5432
 
-[Amazon Redshift DSN 64]
+[Redshift]
 # This key is not necessary and is only to give a description of the data source.
 Description=Amazon Redshift ODBC Driver (64-bit) DSN
 # Driver: The location where the ODBC driver is installed to.
