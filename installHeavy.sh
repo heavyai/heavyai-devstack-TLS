@@ -46,8 +46,8 @@ services:
     ipc: shareable
     volumes:
       - /var/lib/heavyai:/var/lib/heavyai
-      - /var/lib/heavyai/odbc/odbc.ini:/etc/odbc.ini
-      - /var/lib/heavyai/odbc/odbcinst.ini:/etc/odbcinst.ini
+      - "/var/lib/heavyai/odbc/odbc.ini:/etc/odbc.ini:ro"
+      - "/var/lib/heavyai/odbc/odbcinst.ini:/etc/odbcinst.ini:ro"
       - ./install_odbc_drivers.sh:/tmp/install_odbc_drivers.sh
     networks:
       - jupyterhub-network
@@ -335,6 +335,7 @@ installFiles(){
   
   sudo mkdir /var/lib/heavyai
   sudo mkdir /var/lib/heavyai/odbc
+  sudo ./configHeavyConnect.sh
   sudo chown ubuntu /var/lib/heavyai
   sudo mkdir /var/lib/heavyai/import
   sudo mkdir /var/lib/heavyai/jupyter
