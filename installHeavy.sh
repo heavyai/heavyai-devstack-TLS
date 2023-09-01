@@ -90,7 +90,7 @@ services:
       # JupyterHub will spawn this Notebook image for users
       DOCKER_NOTEBOOK_IMAGE: jupyter/base-notebook:latest
       # Notebook directory inside user image
-      DOCKER_NOTEBOOK_DIR: /home/jovyan/work/jupyterData
+      DOCKER_NOTEBOOK_DIR: /home/jovyan/work
       # Using this run command
       DOCKER_SPAWN_CMD: start-singleuser.sh
 
@@ -115,7 +115,7 @@ allowed-import-paths = ["/var/lib/heavyai/import"]
 allowed-export-paths = ["/"]
 idle-session-duration = 43200
 enable-logs-system-tables = true
-enable-executor-resource-mgr=0
+enable-executor-resource-mgr= true
 
 [web]
 port = 6273
@@ -125,7 +125,6 @@ jupyter-url = "/jupyter"
 iq-url = "http://localhost:6275"
 
 [iq]
-
 heavydb_host = "localhost"
 heavydb_port = 6274
 openai_api_key = "$OPENAPI_KEY"
@@ -303,14 +302,14 @@ c.DockerSpawner.network_name = os.environ["DOCKER_NETWORK_NAME"]
 # Most jupyter/docker-stacks *-notebook images run the Notebook server as
 # user jovyan, and set the notebook directory to /home/jovyan/work.
 # We follow the same convention.
-notebook_dir = os.environ.get("DOCKER_NOTEBOOK_DIR")
+notebook_dir = os.environ.get("DOCKER_NOTEBOOK_DIR") or ("home/jovyan")
 c.DockerSpawner.notebook_dir = notebook_dir
 
 # Mount the real user's Docker volume on the host to the notebook user's
 # notebook directory in the container
-c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir, 
+c.DockerSpawner.volumes = {#"jupyterhub-user-{username}": notebook_dir, 
                         #"jupyterhub-shared": "/home/jovyan/work/shared",
-                        "/home/ubuntu/jupyterData": "/home/jovyan"}
+                        "/home/ubuntu/jupyterData": "/home/jovyan/work"}
 
 # Remove containers once they are stopped
 c.DockerSpawner.remove = True
@@ -353,7 +352,9 @@ installFiles(){
   sudo mkdir /var/lib/heavyai/import
   sudo mkdir /var/lib/heavyai/jupyter
   sudo mkdir /home/$USER/jupyterData
+  sudo mkdir /home/$USER/jupyterData/work
   sudo chmod -R 777 /home/$USER/jupyterData
+  sudo chmod -R 777 /home/$USER/jupyterData/work
   sudo chmod ugo+rwx -R /home/$USER/jupyterData
   sudo chown -R ubuntu /var/lib/heavyai
   sudo cp ./daemon.json /etc/docker/.
