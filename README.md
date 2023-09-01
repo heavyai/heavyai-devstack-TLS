@@ -57,9 +57,13 @@ bash
 
 `(base) jovyan@c078f10beb41:~$`
 
-```mamba create -n heavyai-gpu -c rapidsai -c nvidia -c conda-forge -c defaults --no-channel-priority cudf heavyai pyheavydb pytest shapely geopandas pyarrow=*=*cuda ibis-framework rbc ibis-heavyai``````
+```
+mamba create -n heavyai-gpu -c rapidsai -c nvidia -c conda-forge -c defaults --no-channel-priority cudf heavyai pyheavydb pytest shapely geopandas pyarrow=*=*cuda ibis-framework rbc ibis-heavyai
+```
 
- ```conda activate heavyai-gpu```
+ ```
+ conda activate heavyai-gpu
+ ```
 
 `(heavyai-gpu) jovyan@c078f10beb41:~$`
 
