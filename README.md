@@ -67,11 +67,17 @@ mamba create -n heavyai-gpu -c rapidsai -c nvidia -c conda-forge -c defaults --n
 
 `(heavyai-gpu) jovyan@c078f10beb41:~$`
 
-```mamba install ipykernel```
+```
+mamba install ipykernel
+```
 
-```python -m ipykernel install --user --name=heavyai-gpu```
+```
+python -m ipykernel install --user --name=heavyai-gpu
+```
 
-```conda deactivate```
+```
+conda deactivate
+```
 
 ## Test connection
 Now you can open a new notebook using one of the two kernels defined above.  Simply open up a notebook and try the following commands in a cell inserting the server address below in the `my.server.address`
