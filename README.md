@@ -41,16 +41,16 @@ In the jupyter environment, you need to configure the necessary kernel configs a
 - From the Jupyter UI, select the `Terminal` icon.  This will allow you to enter the commands below to configure two kernel configs to use.
 <!---
 ### heavyai-cpu kernel
-```bash   
-(base) jovyan@c078f10beb41:~$ mamba create -n heavyai-cpu -c conda-forge -c defaults   --no-channel-priority heavyai pyheavydb pytest shapely geopandas ibis-framework rbc ibis-heavyai
+bash   
+(base) jovyan@c078f10beb41:~$ ```mamba create -n heavyai-cpu -c conda-forge -c defaults   --no-channel-priority heavyai pyheavydb pytest shapely geopandas ibis-framework rbc ibis-heavyai```
 
-(base) jovyan@c078f10beb41:~$ conda activate heavyai-cpu
+(base) jovyan@c078f10beb41:~$ ```conda activate heavyai-cpu``````
 
-(heavyai-cpu) jovyan@c078f10beb41:~$ mamba install ipykernel
+(heavyai-cpu) jovyan@c078f10beb41:~$ ```mamba install ipykernel``````
 
-(heavyai-cpu) jovyan@c078f10beb41:~$ python -m ipykernel install --user --name=heavyai-cpu
+(heavyai-cpu) jovyan@c078f10beb41:~$ ```python -m ipykernel install --user --name=heavyai-cpu```
 
-(heavyai-cpu) jovyan@c078f10beb41:~$ conda deactivate
+(heavyai-cpu) jovyan@c078f10beb41:~$ ```conda deactivate```
 ```
 --->
 
