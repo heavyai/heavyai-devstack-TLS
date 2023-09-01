@@ -44,29 +44,31 @@ In the jupyter environment, you need to configure the necessary kernel configs a
 bash   
 (base) jovyan@c078f10beb41:~$ ```mamba create -n heavyai-cpu -c conda-forge -c defaults   --no-channel-priority heavyai pyheavydb pytest shapely geopandas ibis-framework rbc ibis-heavyai```
 
-(base) jovyan@c078f10beb41:~$ ```conda activate heavyai-cpu``````
+(base) jovyan@c078f10beb41:~$ ```conda activate heavyai-cpu```
 
-(heavyai-cpu) jovyan@c078f10beb41:~$ ```mamba install ipykernel``````
+(heavyai-cpu) jovyan@c078f10beb41:~$ ```mamba install ipykernel```
 
 (heavyai-cpu) jovyan@c078f10beb41:~$ ```python -m ipykernel install --user --name=heavyai-cpu```
 
 (heavyai-cpu) jovyan@c078f10beb41:~$ ```conda deactivate```
-```
 --->
 
 ### heavai-gpu kernel
-```bash
-(base) jovyan@c078f10beb41:~$ mamba create -n heavyai-gpu -c rapidsai -c nvidia -c conda-forge -c defaults --no-channel-priority cudf heavyai pyheavydb pytest shapely geopandas pyarrow=*=*cuda ibis-framework rbc ibis-heavyai
 
-(base) jovyan@c078f10beb41:~$ conda activate heavyai-gpu
+`(base) jovyan@c078f10beb41:~$`
 
-(heavyai-gpu) jovyan@c078f10beb41:~$ mamba install ipykernel
+```mamba create -n heavyai-gpu -c rapidsai -c nvidia -c conda-forge -c defaults --no-channel-priority cudf heavyai pyheavydb pytest shapely geopandas pyarrow=*=*cuda ibis-framework rbc ibis-heavyai``````
 
-(heavyai-gpu) jovyan@c078f10beb41:~$ python -m ipykernel install --user --name=heavyai-gpu
+ ```conda activate heavyai-gpu```
 
-(heavyai-gpu) jovyan@c078f10beb41:~$ conda deactivate
-```
-    
+`(heavyai-gpu) jovyan@c078f10beb41:~$`
+
+```mamba install ipykernel```
+
+```python -m ipykernel install --user --name=heavyai-gpu```
+
+```conda deactivate```
+
 ## Test connection
 Now you can open a new notebook using one of the two kernels defined above.  Simply open up a notebook and try the following commands in a cell inserting the server address below in the `my.server.address`
 ```
