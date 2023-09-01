@@ -1,0 +1,32 @@
+{
+    "dataFiles": [
+        {
+            "tablename": "",
+            "filetype": "lz4",
+            "filepath": "s3://presales-demo-heavyai/<folder>"
+        },
+        {
+            "tablename": "",
+            "filetype": "lz4",
+            "filepath": "s3://presales-demo-heavyai/<folder>"
+        },
+        {
+            "tablename": "",
+            "filetype": "lz4",
+            "filepath": "s3://presales-demo-heavyai/<folder>"
+        },
+        {
+            "tablename": "",
+            "filetype": "lz4",
+            "filepath": "s3://presales-demo-heavyai/<folder>"
+        }
+
+    ],
+    "dashboards": [
+        {
+            "filename": "",
+            "name": "",
+            "filepath": "s3://presales-demo-heavyai/<folder>"
+        }
+    ]
+  }
