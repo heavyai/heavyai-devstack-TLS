@@ -1,10 +1,5 @@
 #!/bin/bash
-
- if [ -e $VERSIONS_FILE ]; then
-    source ./config.sh
-else    
-    echo "No config.sh file.  Using defaults"
-fi
+source ../config.sh
 
 TMP_DIR="/var/lib/heavyai/import"
 
@@ -15,7 +10,6 @@ if [ -z "$AWS_ACCESS_KEY_ID" ]; then
 fi
 
 if [ $# -eq 0 ]; then
-    echo "No package file specified"
     echo "Usage:  loadDataPackage <packageFile.json>"
     exit
 else
