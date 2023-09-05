@@ -62,7 +62,7 @@ mamba create -n heavyai-gpu -c rapidsai -c nvidia -c conda-forge -c defaults --n
 ```
 
  ```
- conda activate heavyai-gpu
+ mamba activate heavyai-gpu
  ```
 
 `(heavyai-gpu) jovyan@c078f10beb41:~$`
