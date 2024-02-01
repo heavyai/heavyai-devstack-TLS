@@ -11,8 +11,8 @@ JUPYTERHUB_CONF_FILE="jupyterhub_config.py"
 DOCKERFILE_FILE="Dockerfile.jupyterhub"
 EXTERNAL_PORT="8001"
 OPENAPI_KEY=""
-LANGSMITH_KEY=""
-LANGSMITH_PROJECT=""
+LANGSMITH_KEY="ls__d90b2d77ae3447c3901b5735d7ed64bb"
+LANGSMITH_PROJECT="heavyiq-demo"
 
 createFiles(){
 mkdir -p $CONFIG_TMP
@@ -130,6 +130,15 @@ heavydb_port = 6274
 openai_api_key = "$OPENAPI_KEY"
 langsmith_project = "$LANGSMITH_PROJECT"
 langsmith_api_key = "$LANGSMITH_KEY"
+enable_str_literal_correction = true
+enable_debug_endpoints = false
+heavyiq_log_level = "DEBUG"
+access_log_level = "DEBUG"
+custom_llm_type = "API_VLLM" # API or AZURE
+custom_llm_api_base = "https://urwh97t2l6r4w9-5000.proxy.runpod.net/v1"
+custom_llm_api_vllm_beam_width = 2
+custom_llm_api_context_window = 8192 # context window limit
+openai_api_key = ""
 conFileEnd
 
 cat > daemon.json <<daemonJson
