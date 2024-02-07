@@ -162,6 +162,8 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
         "enableJupyter": true,
         "feature_flags": {
             "ui/iq_query_generator": true,
+            "dev/enable_notebook_ui_sql_editor": true,
+            "dev/iq-fastforward" : true,
             "ui/default_theme": "dark",
             "ui/enable_new_combo_chart": true,
             "ui/sticky_simple_filter_panel": false,
