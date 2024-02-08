@@ -138,7 +138,6 @@ custom_llm_type = "API_VLLM" # API or AZURE
 custom_llm_api_base = "https://urwh97t2l6r4w9-5000.proxy.runpod.net/v1"
 custom_llm_api_vllm_beam_width = 2
 custom_llm_api_context_window = 8192 # context window limit
-openai_api_key = ""
 conFileEnd
 
 cat > daemon.json <<daemonJson
