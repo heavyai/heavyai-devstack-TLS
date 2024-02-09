@@ -357,8 +357,8 @@ installFiles(){
   
   sudo mkdir /var/lib/heavyai
   sudo mkdir /var/lib/heavyai/odbc
-  sudo /home/ubuntu/heavyai-devstack/configHeavyConnect.sh
-  sudo chown ubuntu /var/lib/heavyai
+  sudo /home/$USER/heavyai-devstack/configHeavyConnect.sh
+  sudo chown $USER /var/lib/heavyai
   sudo mkdir /var/lib/heavyai/import
   sudo mkdir /var/lib/heavyai/jupyter
   sudo mkdir /home/$USER/jupyterData
@@ -366,7 +366,7 @@ installFiles(){
   sudo chmod -R 777 /home/$USER/jupyterData
   sudo chmod -R 777 /home/$USER/jupyterData/work
   sudo chmod ugo+rwx -R /home/$USER/jupyterData
-  sudo chown -R ubuntu /var/lib/heavyai
+  sudo chown -R $USER /var/lib/heavyai
   sudo cp ./daemon.json /etc/docker/.
   sudo systemctl stop docker
   sudo systemctl start docker
