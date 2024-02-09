@@ -108,7 +108,7 @@ cd $CONFIG_TMP
 cat > $HEAVY_CONFIG_FILE_NAME <<conFileEnd
 http-port = 6278
 calcite-port = 6279
-data = "/data"
+data = "/var/lib/heavyai/storage"
 null-div-by-zero = true
 enable-watchdog = false
 allowed-import-paths = ["/var/lib/heavyai/import"]
