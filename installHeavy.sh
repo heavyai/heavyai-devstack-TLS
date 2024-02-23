@@ -1,4 +1,4 @@
-#!/bin/bash
+s#!/bin/bash
 # This script downloads a docker image and sets config files for standard Heavy.AI demo environments.
 # Advanced usage can leverage an external json file with pointers to custom install bundles, but by default this will download the latest official Heavy.AI docker image.
 # This install process configures a docker-compose based approach and only works in that context
@@ -135,7 +135,7 @@ enable_debug_endpoints = false
 heavyiq_log_level = "DEBUG"
 access_log_level = "DEBUG"
 custom_llm_type = "API_VLLM" # API or AZURE
-custom_llm_api_base = "https://urwh97t2l6r4w9-5000.proxy.runpod.net/v1"
+custom_llm_api_base = "http://209.20.158.0:5000/v1"
 custom_llm_api_vllm_beam_width = 2
 custom_llm_api_context_window = 8192 # context window limit
 conFileEnd
