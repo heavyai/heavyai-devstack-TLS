@@ -116,10 +116,13 @@ allowed-export-paths = ["/"]
 idle-session-duration = 43200
 enable-logs-system-tables = true
 enable-executor-resource-mgr= true
+log-rotation-size = 10000000000
 
+[web]
 [web]
 port = 6273
 servers-json = "/var/lib/heavyai/servers.json"
+enable-browser-logs = true
 frontend = "/opt/heavyai/frontend"
 jupyter-url = "/jupyter"
 iq-url = "http://localhost:6275"
@@ -134,6 +137,8 @@ enable_str_literal_correction = true
 enable_debug_endpoints = false
 heavyiq_log_level = "DEBUG"
 access_log_level = "DEBUG"
+access_log_max_file_size = 10485760000
+heavyiq_log_max_file_size = 10485760000
 custom_llm_type = "API_VLLM" # API or AZURE
 custom_llm_api_base = "http://209.20.158.0:5000/v1"
 custom_llm_api_vllm_beam_width = 2
@@ -160,42 +165,40 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
         "password": "HyperInteractive",
         "enableJupyter": true,
         "feature_flags": {
-            "ui/iq_query_generator": true,
-            "dev/enable_notebook_ui_sql_editor": true,
-            "dev/iq-fastforward" : true,
-            "ui/default_theme": "dark",
-            "ui/enable_new_combo_chart": true,
-            "ui/sticky_simple_filter_panel": false,
-            "ui/enable_linked_zoom": true,
-            "ui/dashboard_tabs": true,
-            "ui/shift_to_zoom": false,
-            "ui/enable_crosslink_panel": true,
-            "ui/enable_dashboard_shared_custom_sql": true,
-            "ui/enable_custom_source_manager": true,
-            "ui/geojoined-bounding-boxes": true,
-            "ui/hide_deprecated_chart_types": false,
-            "ui/map_export_limit": 50000000,
-            "ui/table_export_limit": 50000000,
-            "performance/crossfilter_pause_chart_button": true,
-            "ui/enable_crosslink_panel": true,
-            "ui/enable_custom_source_manager": true,
-            "ui/raster-chart-kebab-visibility-toggle":true,
-            "ui/enable_dashboard_shared_custom_sql": true,
-            "ui/enable_global_custom_sql": true,
-            "ui/enable_map_exports": "true",
-            "ui/enable_dashboard_shared_custom_sql": true,
-            "ui/enable_unrestricted_percentage_view_pie_chart": "true",
-            "ui/geojoined-bounding-boxes": true,
-            "ui/sticky_simple_filter_panel": false,
-            "ui/table_params_in_param_manager": true,
-            "dev/omni_sql_plus_plus_parse_in_strings": true,
-            "dev/parse_crossfilter_tokens": true,
-   	    "ui/enable_crossfilter_replay": true,
-	    "ui/enable_chart_addons": true,
-	    "performance/query_cache_duration": 240000,
-            "performance/query_cache_size": 50,
-            "performance/vega_cache_duration" : 240000,
-            "performance/vega_cache_size" : 40
+          "ui/iq_query_generator": true,
+          "dev/enable_notebook_ui_sql_editor": true,
+          "dev/iq-fastforward": true,
+          "ui/default_theme": "dark",
+          "ui/enable_new_combo_chart": true,
+          "ui/sticky_simple_filter_panel": false,
+          "ui/enable_linked_zoom": true,
+          "ui/dashboard_tabs": true,
+          "ui/shift_to_zoom": false,
+          "ui/enable_crosslink_panel": true,
+          "ui/enable_dashboard_shared_custom_sql": true,
+          "ui/enable_custom_source_manager": true,
+          "ui/geojoined-bounding-boxes": true,
+          "ui/hide_deprecated_chart_types": false,
+          "ui/map_export_limit": 50000000,
+          "ui/table_export_limit": 50000000,
+          "performance/crossfilter_pause_chart_button": true,
+          "ui/raster-chart-kebab-visibility-toggle": true,
+          "ui/enable_global_custom_sql": true,
+          "ui/enable_map_exports": "true",
+          "ui/enable_unrestricted_percentage_view_pie_chart": "true",
+          "ui/table_params_in_param_manager": true,
+          "dev/omni_sql_plus_plus_parse_in_strings": true,
+          "dev/parse_crossfilter_tokens": true,
+          "ui/enable_crossfilter_replay": true,
+          "ui/enable_chart_addons": true,
+          "performance/query_cache_duration": 240000,
+          "performance/query_cache_size": 50,
+          "performance/vega_cache_duration": 240000,
+          "performance/vega_cache_size": 40,
+          "ui/enable_experimental_charts": true,
+          "ui/html-editor": true,
+          "ui/enable_new_text_chart": true,
+          "dev/sql_notebook_cards": "{\"us_tweets\": [{\"text\": \"Show the top 10 states for the number of tweets per capita excluding District of Columbia.\", \"dataSources\": [\"us_tweets\", \"usa_states\"]}, {\"text\": \"Show the number of mentions of bitcoin per day on Twitter and the daily high price of bitcoin.\", \"dataSources\": [\"us_tweets\", \"btc_1min\"]}, {\"text\": \"Of users who tweeted in Florida, list the other states they tweeted in with number of users per capita, in descending order.\", \"dataSources\": [\"us_tweets\", \"usa_states\"]}, {\"text\": \"Show the percentage of tweets mentioning \\\"y'all\\\" or \\\"yall\\\" per state.\", \"dataSources\": [\"us_tweets\"]}]}"
        	 }
   }
 ]
