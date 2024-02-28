@@ -119,7 +119,6 @@ enable-executor-resource-mgr= true
 log-rotation-size = 10000000000
 
 [web]
-[web]
 port = 6273
 servers-json = "/var/lib/heavyai/servers.json"
 enable-browser-logs = true
