@@ -1,4 +1,4 @@
-s#!/bin/bash
+#!/bin/bash
 # This script downloads a docker image and sets config files for standard Heavy.AI demo environments.
 # Advanced usage can leverage an external json file with pointers to custom install bundles, but by default this will download the latest official Heavy.AI docker image.
 # This install process configures a docker-compose based approach and only works in that context
