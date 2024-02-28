@@ -9,15 +9,21 @@ clean_docker() {
 }
 
 install_docker(){
-  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
-  | sudo apt-key add -
-  sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-   
+  sudo apt-get update
+  sudo apt-get install ca-certificates curl
+  sudo install -m 0755 -d /etc/apt/keyrings
+  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
   sudo apt update
-  sudo apt install docker-ce docker-ce-cli containerd.io docker-compose jq
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin jq
+
   sudo usermod  --append --groups docker $USER
   sudo docker run hello-world
   }
@@ -33,23 +39,14 @@ sudo apt install linux-headers-$(uname -r)
 sudo apt install pciutils 
 sudo apt install libvulkan1
 
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget https://developer.download.nvidia.com/compute/cuda/12.2.0/local_installers/cuda-repo-ubuntu2004-12-2-local_12.2.0-535.54.03-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu2004-12-2-local_12.2.0-535.54.03-1_amd64.deb
-sudo cp /var/cuda-repo-ubuntu2004-12-2-local/cuda-*-keyring.gpg /usr/share/keyrings/
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.2.0/local_installers/cuda-repo-ubuntu2204-12-2-local_12.2.0-535.54.03-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2204-12-2-local_12.2.0-535.54.03-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2204-12-2-local/cuda-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
 sudo apt-get -y install cuda
-rm cuda-repo-ubuntu2004-12-2-local_12.2.0-535.54.03-1_amd64.deb
 
-#wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-#sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-#wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
-#sudo dpkg -i cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
-#sudo cp /var/cuda-repo-ubuntu2004-11-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
-#sudo apt-get update
-#sudo apt-get -y install cuda
-#sudo rm cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
 }
 
 nvidia_docker_runtime(){
@@ -68,10 +65,10 @@ sudo docker run --gpus=all --rm nvidia/cuda:11.8.0-runtime-ubuntu20.04 nvidia-sm
 }
 
 #clean_docker #Very seldom is this step required, but it is included in the standard Heavy.AI documentation
-install_docker #Most environments already have docker installed and a more straightforward Docker install tends to work.  This step is also outlined in Heavy.AI documentation, but is most often not needed
+#install_docker #Most environments already have docker installed and a more straightforward Docker install tends to work.  This step is also outlined in Heavy.AI documentation, but is most often not needed
 simple_docker_config
 install_nvidia_drivers
 nvidia_docker_runtime
-nvidia_driver_check
+#nvidia_driver_check
 echo "===>>>> Make sure you execute the following command before trying to run docker-compose"
 echo "newgrp docker"
