@@ -69,6 +69,5 @@ sudo docker run --gpus=all --rm nvidia/cuda:11.8.0-runtime-ubuntu20.04 nvidia-sm
 simple_docker_config
 install_nvidia_drivers
 nvidia_docker_runtime
-#nvidia_driver_check
 echo "===>>>> Make sure you execute the following command before trying to run docker-compose"
 echo "newgrp docker"
