@@ -47,6 +47,8 @@ sudo cp /var/cuda-repo-ubuntu2204-12-4-local/cuda-*-keyring.gpg /usr/share/keyri
 sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-4
 
+sudo apt-get install -y cuda-drivers
+
 }
 
 nvidia_docker_runtime(){
