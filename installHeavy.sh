@@ -117,6 +117,8 @@ idle-session-duration = 43200
 enable-logs-system-tables = true
 enable-executor-resource-mgr= true
 log-rotation-size = 10000000000
+trivial-loop-join-threshold=1000000000
+
 
 [web]
 port = 6273
