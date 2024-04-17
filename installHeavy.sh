@@ -135,7 +135,6 @@ openai_api_key = "$OPENAPI_KEY"
 langsmith_project = "$LANGSMITH_PROJECT"
 langsmith_api_key = "$LANGSMITH_KEY"
 enable_str_literal_correction = true
-enable_debug_endpoints = false
 heavyiq_log_level = "DEBUG"
 access_log_level = "DEBUG"
 access_log_max_file_size = 10485760000
