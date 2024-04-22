@@ -198,7 +198,7 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
           "ui/enable_experimental_charts": true,
           "ui/html-editor": true,
           "ui/enable_new_text_chart": true,
-          "dev/sql_notebook_cards": "{\"us_tweets\": [{\"text\": \"Show the top 10 states for the number of tweets per capita excluding District of Columbia.\", \"dataSources\": [\"us_tweets\", \"usa_states\"]}, {\"text\": \"Show the number of mentions of bitcoin per day on Twitter and the daily high price of bitcoin.\", \"dataSources\": [\"us_tweets\", \"btc_1min\"]}, {\"text\": \"Of users who tweeted in Florida, list the other states they tweeted in with number of users per capita, in descending order.\", \"dataSources\": [\"us_tweets\", \"usa_states\"]}, {\"text\": \"Show the percentage of tweets mentioning \\\"y'all\\\" or \\\"yall\\\" per state.\", \"dataSources\": [\"us_tweets\"]}]}"
+          "dev/sql_notebook_cards": "{\"heavyai\": [{\"text\": \"one.\"}, {\"text\": \"two.\"}, {\"text\": \"three.\"}, {\"text\": \"four.\"}]}"
        	 }
   }
 ]
