@@ -88,3 +88,4 @@ else
         echo -e "${RED}Failed to add $USER_NAME to the docker group. Please check your permissions.${NC}"
     fi
 fi
+
