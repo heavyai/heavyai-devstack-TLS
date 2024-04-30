@@ -30,28 +30,29 @@ services:
     ipc: shareable
     entrypoint: /bin/bash -c '/opt/heavyai/bin/heavy_web_server --config /var/lib/heavyai/immerse/heavy.conf'
     volumes:
-      - /var/lib/heavyai:/var/lib/heavyai
+    - /var/lib/heavyai:/var/lib/heavyai
     networks:
-      - heavy-network
+    - heavy-network
     ports:
-      - "6273:6273"
+    - "6273:6273"
 
-   iq:
+  iq:
     container_name: iq
     image: docker-internal.mapd.com/mapd/mapd-render:master
     restart: no
     ipc: shareable
     environment:
-      - CONFIG_FILE=/var/lib/heavyai/iq/heavy.conf
-      - MAPD_DATA=/var/lib/heavyai/iq
-      - MAPD_HEAVYIQ_PORT=6275
+    - CONFIG_FILE=/var/lib/heavyai/iq/heavy.conf
+    - MAPD_DATA=/var/lib/heavyai/iq
+    - MAPD_HEAVYIQ_PORT=6275
     entrypoint: /bin/bash -c '/opt/heavyai/scripts/ee/start_heavyiq.sh'
     volumes:
-      - /var/lib/heavyai:/var/lib/heavyai
+    - /var/lib/heavyai:/var/lib/heavyai
     networks:
-      - heavy-network
+    - heavy-network
     ports:
-      - "6275:6275"
+    - "6275:6275"
+
 networks:
   heavy-network:
     name: heavy-network
