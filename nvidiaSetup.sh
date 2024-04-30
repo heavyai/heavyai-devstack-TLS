@@ -13,6 +13,8 @@ sudo dpkg -i cuda-keyring_1.1-1_all.deb
 sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-4
 
+sudo apt-get install -y cuda-drivers
+
 }
 
 nvidia_docker_runtime(){
@@ -23,6 +25,7 @@ curl --silent --location https://nvidia.github.io/nvidia-container-runtime/$dist
   sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
 sudo apt-get update
 sudo apt-get install -y nvidia-container-runtime
+
 sudo systemctl restart docker
 }
 

@@ -6,7 +6,7 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-os_packages=("docker" "xmlstarlet")
+os_packages=("docker.io" "xmlstarlet")
 missing_packages=()
 UPDATE_DONE=0
 
