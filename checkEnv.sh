@@ -51,10 +51,10 @@ done
 echo -e "${BLUE}Checking NVIDIA GPU and Docker configuration...${NC}"
 
 if command -v nvidia-smi &> /dev/null; then
-    echo -e "${GREEN}NVIDIA drivers are installed.${NC}"
+    echo -e "Nvidia Driver:   [${GREEN}Installed${NC}]"
     nvidia-smi
 else
-    echo -e "${RED}NVIDIA drivers are not installed.${NC}"
+    echo -e "Nvidia Driver:   [${RED}Failed${NC}]"
 fi
 
 # Configuring Docker
@@ -68,24 +68,25 @@ if ! group_exists; then
     echo "The docker group does not exist. Creating docker group..."
     sudo groupadd docker
     if [ $? -eq 0 ]; then
-        echo -e "${GREEN}Docker group created successfully.${NC}"
+        echo -e "Docker Group:   [${GREEN}Installed${NC}]"
     else
-        echo -e "${RED}Failed to create docker group. Please check your permissions.${NC}"
+        echo -e "Docker Group:   [${RED}Failed${NC}]"
         exit 1
     fi
 else
-    echo -e "${GREEN}Docker group already exists.${NC}"
+    echo -e "Docker Group:   [${GREEN}Installed${NC}]"
 fi
 
 if groups $USER_NAME | grep -qw docker; then
-    echo -e "${GREEN}$USER_NAME is already in the docker group.${NC}"
+    echo -e "$USER_NAME:   [${GREEN}Installed${NC}]"
 else
     echo "$USER_NAME is not in the docker group. Adding $USER_NAME to the docker group..."
     sudo usermod -aG docker $USER_NAME
     if [ $? -eq 0 ]; then
-        echo -e "${GREEN}$USER_NAME has been added to the docker group. Please log out and back in for this to take effect.${NC}"
+        echo -e "$USER_NAME:   [${GREEN}Installed${NC}]"
     else
-        echo -e "${RED}Failed to add $USER_NAME to the docker group. Please check your permissions.${NC}"
+        echo -e "$USER_NAME:   [${RED}Failed${NC}]"
+"
     fi
 fi
 
