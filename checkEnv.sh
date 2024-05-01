@@ -93,7 +93,7 @@ echo -e "${BLUE}Checking NVIDIA Docker configuration...${NC}"
 
 if command -v nvidia-container-runtime &> /dev/null; then
     echo -e "Nvidia Docker:   [${GREEN}Installed${NC}]"
-    nvidia-container-runtime --check
+    sudo docker run --rm --gpus all ubuntu nvidia-smi
 else
     echo -e "Nvidia Docker:   [${RED}Failed${NC}]"
     echo -e "Run nvidiaRuntime2.sh to install Nvidia Docker"
