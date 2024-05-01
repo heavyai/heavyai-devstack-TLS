@@ -48,15 +48,6 @@ for package in "${missing_packages[@]}"; do
     installPackage $package
 done
 
-echo -e "${BLUE}Checking NVIDIA GPU and Docker configuration...${NC}"
-
-if command -v nvidia-smi &> /dev/null; then
-    echo -e "Nvidia Driver:   [${GREEN}Installed${NC}]"
-    nvidia-smi
-else
-    echo -e "Nvidia Driver:   [${RED}Failed${NC}]"
-fi
-
 # Configuring Docker
 USER_NAME=$(whoami)
 
@@ -86,7 +77,24 @@ else
         echo -e "$USER_NAME:   [${GREEN}Installed${NC}]"
     else
         echo -e "$USER_NAME:   [${RED}Failed${NC}]"
-"
     fi
 fi
+echo -e "${BLUE}Checking NVIDIA GPU ...${NC}"
 
+if command -v nvidia-smi &> /dev/null; then
+    echo -e "Nvidia Driver:   [${GREEN}Installed${NC}]"
+    nvidia-smi
+else
+    echo -e "Nvidia Driver:   [${RED}Failed${NC}]"
+    echo -e "Run nvidiaDriver1.sh to install Nvidia drivers"
+fi
+
+echo -e "${BLUE}Checking NVIDIA Docker configuration...${NC}"
+
+if command -v nvidia-container-runtime &> /dev/null; then
+    echo -e "Nvidia Docker:   [${GREEN}Installed${NC}]"
+    nvidia-container-runtime --check
+else
+    echo -e "Nvidia Docker:   [${RED}Failed${NC}]"
+    echo -e "Run nvidiaRuntime2.sh to install Nvidia Docker"
+fi
