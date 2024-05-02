@@ -55,30 +55,30 @@ configureApp() {
     cp "$template_file" "$config_file"
     
     # Using alternative delimiters for sed to handle paths with slashes
-    sed -i '' "s|{{IMMERSE_PORT}}|$IMMERSE_PORT|g" $config_file
-    sed -i '' "s|{{HEAVYDB_CALCITE_PORT}}|$HEAVYDB_CALCITE_PORT|g" $config_file
-    sed -i '' "s|{{HEAVYIQ_PORT}}|$HEAVYIQ_PORT|g" $config_file
-    sed -i '' "s|{{HEAVYDB_PORT}}|$HEAVYDB_PORT|g" $config_file
-    sed -i '' "s|{{HEAVYDB_BACKEND_PORT}}|$HEAVYDB_BACKEND_PORT|g" $config_file
+    sed -i "s|{{IMMERSE_PORT}}|$IMMERSE_PORT|g" $config_file
+    sed -i "s|{{HEAVYDB_CALCITE_PORT}}|$HEAVYDB_CALCITE_PORT|g" $config_file
+    sed -i "s|{{HEAVYIQ_PORT}}|$HEAVYIQ_PORT|g" $config_file
+    sed -i "s|{{HEAVYDB_PORT}}|$HEAVYDB_PORT|g" $config_file
+    sed -i "s|{{HEAVYDB_BACKEND_PORT}}|$HEAVYDB_BACKEND_PORT|g" $config_file
 
-    sed -i '' "s|{{HEAVY_STORAGE_DIR}}|$HEAVY_STORAGE_DIR|g" "$config_file"
-    sed -i '' "s|{{HEAVYDB_IMPORT_PATH}}|$HEAVYDB_IMPORT_PATH|g" $config_file
-    sed -i '' "s|{{HEAVYDB_EXPORT_PATH}}|$HEAVYDB_EXPORT_PATH|g" $config_file
+    sed -i "s|{{HEAVY_STORAGE_DIR}}|$HEAVY_STORAGE_DIR|g" "$config_file"
+    sed -i "s|{{HEAVYDB_IMPORT_PATH}}|$HEAVYDB_IMPORT_PATH|g" $config_file
+    sed -i "s|{{HEAVYDB_EXPORT_PATH}}|$HEAVYDB_EXPORT_PATH|g" $config_file
     
-    sed -i '' "s|{{HEAVY_IQ_CONFIG}}|$HEAVY_IQ_CONFIG|g" $config_file
-    sed -i '' "s|{{HEAVY_IMMERSE_CONFIG}}|$HEAVY_IMMERSE_CONFIG|g" $config_file
-    sed -i '' "s|{{HEAVYDB_CONFIG_LOCATION}}|$HEAVYDB_CONFIG_LOCATION|g" $config_file
+    sed -i "s|{{HEAVY_IQ_CONFIG}}|$HEAVY_IQ_CONFIG|g" $config_file
+    sed -i "s|{{HEAVY_IMMERSE_CONFIG}}|$HEAVY_IMMERSE_CONFIG|g" $config_file
+    sed -i "s|{{HEAVYDB_CONFIG_LOCATION}}|$HEAVYDB_CONFIG_LOCATION|g" $config_file
 
-    sed -i '' "s|{{IMMERSE_SERVERS_JSON}}|$IMMERSE_SERVERS_JSON|g" $config_file
+    sed -i "s|{{IMMERSE_SERVERS_JSON}}|$IMMERSE_SERVERS_JSON|g" $config_file
 
-    sed -i '' "s|{{HEAVYDB_BACKEND_URL}}|$HEAVYDB_BACKEND_URL|g" $config_file
-    sed -i '' "s|{{IQ_URL}}|$IQ_URL|g" $config_file
+    sed -i "s|{{HEAVYDB_BACKEND_URL}}|$HEAVYDB_BACKEND_URL|g" $config_file
+    sed -i "s|{{IQ_URL}}|$IQ_URL|g" $config_file
 
-    sed -i '' "s|{{HEAVYDB_SERVICE_NAME}}|$HEAVYDB_SERVICE_NAME|g" $config_file
-    sed -i '' "s|{{IMMERSE_SERVICE_NAME}}|$IMMERSE_SERVICE_NAME|g" $config_file
-    sed -i '' "s|{{IQ_SERVICE_NAME}}|$IQ_SERVICE_NAME|g" $config_file
+    sed -i "s|{{HEAVYDB_SERVICE_NAME}}|$HEAVYDB_SERVICE_NAME|g" $config_file
+    sed -i "s|{{IMMERSE_SERVICE_NAME}}|$IMMERSE_SERVICE_NAME|g" $config_file
+    sed -i "s|{{IQ_SERVICE_NAME}}|$IQ_SERVICE_NAME|g" $config_file
 
-    sed -i '' "s|{{CONTAINER}}|$CONTAINER|g" $config_file
+    sed -i "s|{{CONTAINER}}|$CONTAINER|g" $config_file
 }
 
 setupInstall(){
