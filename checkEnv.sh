@@ -83,7 +83,7 @@ echo -e "${BLUE}Checking NVIDIA GPU ...${NC}"
 
 if command -v nvidia-smi &> /dev/null; then
     echo -e "Nvidia Driver:   [${GREEN}Installed${NC}]"
-    nvidia-smi
+ #   nvidia-smi
 else
     echo -e "Nvidia Driver:   [${RED}Failed${NC}]"
     echo -e "Run nvidiaDriver1.sh to install Nvidia drivers"
@@ -93,7 +93,7 @@ echo -e "${BLUE}Checking NVIDIA Docker configuration...${NC}"
 
 if command -v nvidia-container-runtime &> /dev/null; then
     echo -e "Nvidia Docker:   [${GREEN}Installed${NC}]"
-    nvidia-container-runtime --version
+#    nvidia-container-runtime --version
 else
     echo -e "Nvidia Docker:   [${RED}Failed${NC}]"
     echo -e "Run nvidiaRuntime2.sh to install Nvidia Docker"

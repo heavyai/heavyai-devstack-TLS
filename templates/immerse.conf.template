@@ -1,0 +1,11 @@
+
+data = "{{HEAVY_IMMERSE_LOCATION}}"
+
+[web]
+port = 6273
+servers-json = "{{IMMERSE_SERVERS_JSON}}"
+frontend = "/opt/heavyai/frontend"
+development = true
+verbose = true
+backend-url = "{{HEAVYDB_BACKEND_URL}}"
+iq-url = "{{IQ_URL}}"

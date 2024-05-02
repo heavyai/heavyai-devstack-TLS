@@ -7,21 +7,30 @@ if [ -f ./.env ]; then
 else
     echo ".env file does not exist. Using defaults"
 fi
-HEAVY_CONF_TEMPLATE="./templates/heavy.conf.complete"
-HEAVYIQ_CONF_TEMPLATE="./templates/heavy.conf.complete"
-IMMERSE_CONF_TEMPLATE="./templates/heavy.conf.complete"
-IMMERSE_SERVERS_JSON_TEMPLATE="./templates/servers.json"
-DOCKER_FILE_TEMPLATE="./templates/docker-compose-soa.yml"
+
+HEAVYDB_CONF_FILENAME="heavydb.conf"
+HEAVYIQ_CONF_FILENAME="iq.conf"
+IMMERSE_CONF_FILENAME="immerse.conf"
+TEMPLATE_FOLDER="./templates"
+HEAVY_CONF_TEMPLATE="$TEMPLATE_FOLDER/$HEAVYDB_CONF_FILENAME.template"
+HEAVYIQ_CONF_TEMPLATE="$TEMPLATE_FOLDER/$HEAVYIQ_CONF_FILENAME.template"
+IMMERSE_CONF_TEMPLATE="$TEMPLATE_FOLDER/$IMMERSE_CONF_FILENAME.template"
+
+IMMERSE_SERVERS_JSON_TEMPLATE="$TEMPLATE_FOLDER/servers.json"
+DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-soa.yml"
 
 HEAVYDB_SERVICE_NAME="heavydb"
 IMMERSE_SERVICE_NAME="immerse"
 IQ_SERVICE_NAME="iq"
-CONFIG_STAGING_LOCATION="./test"
+CONFIG_STAGING_LOCATION="./staging"
 
 : ${HEAVY_CONFIG_BASE:="/var/lib/heavyai"} #typically /var/lib/heavyai
 
-HEAVYDB_CONFIG_LOCATION="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual path for the config
-
+HEAVYDB_CONFIG_FILE="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual path for the config
+: ${HEAVY_IQ_LOCATION:="${HEAVY_CONFIG_BASE}/iq"}
+: ${HEAVY_IQ_CONFIG_FILE:="${HEAVY_IQ_CONFIG_LOCATION}/iq.conf"}
+: ${HEAVY_IMMERSE_LOCATION:="${HEAVY_CONFIG_BASE}/immerse"}
+: ${HEAVY_IMMERSE_CONFIG_FILE:="${HEAVY_IMMERSE_LOCATION}/immerse.conf"}
 
 : ${IMMERSE_PORT:="6273"}
 : ${HEAVYDB_PORT:="6274"}
@@ -29,8 +38,7 @@ HEAVYDB_CONFIG_LOCATION="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual pat
 : ${HEAVYDB_BACKEND_PORT:="6278"}
 : ${HEAVYDB_CALCITE_PORT:="6279"}
 
-: ${HEAVY_IQ_CONFIG:="${HEAVY_CONFIG_BASE}/iq"}
-: ${HEAVY_IMMERSE_CONFIG:="${HEAVY_CONFIG_BASE}/immerse"}
+
 
 : ${HEAVY_STORAGE_DIR:="${HEAVY_CONFIG_BASE}/storage"}
 : ${HEAVYDB_IMPORT_PATH:="${HEAVY_CONFIG_BASE}/import"}
@@ -94,14 +102,16 @@ setupInstall(){
 
 moveConfig(){
     echo "Moving the configuration files to the correct location"
-    cp "$CONFIG_STAGING_LOCATION/heavy.conf" "$HEAVYDB_CONFIG_LOCATION"
-    cp "$CONFIG_STAGING_LOCATION/heavy.conf" "$HEAVY_IMMERSE_CONFIG"
-    cp "$CONFIG_STAGING_LOCATION/heavy.conf" "$HEAVY_IQ_CONFIG"
+    cp "$CONFIG_STAGING_LOCATION/$HEAVYDB_CONF_FILENAME" "$HEAVYDB_CONFIG_LOCATION"
+    cp "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME" "$HEAVY_IQ_CONFIG_LOCATION"
+    cp "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME" "$HEAVY_IMMERSE_LOCATION"
     cp "$CONFIG_STAGING_LOCATION/servers.json" "$IMMERSE_SERVERS_JSON"
     cp "$CONFIG_STAGING_LOCATION/docker-compose.yml" "../docker-compose.yml"
 }
 
-configureApp "$HEAVY_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/heavy.conf"
+configureApp "$HEAVY_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$HEAVYDB_CONF_FILENAME"
+configureApp "$IMMERSE_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME"
+configureApp "$HEAVYIQ_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME"
 configureApp "$DOCKER_FILE_TEMPLATE" "$CONFIG_STAGING_LOCATION/docker-compose.yml"
 configureApp "$IMMERSE_SERVERS_JSON_TEMPLATE" "$CONFIG_STAGING_LOCATION/servers.json"
 setupInstall

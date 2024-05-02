@@ -10,7 +10,7 @@ curl --silent --location https://nvidia.github.io/nvidia-container-runtime/$dist
   sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
 sudo apt-get update
 sudo apt-get install -y nvidia-container-runtime
-sudo nvidia-ctk runtime configure --runtime=docker
+sudo nvidia-ctk runtime configure --runtime=docker --set-as-default
 
 sudo systemctl restart docker
 sudo docker run --rm --gpus all ubuntu nvidia-smi

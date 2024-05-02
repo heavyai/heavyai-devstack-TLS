@@ -1,10 +1,10 @@
-http-port = 6273
-calcite-port = 6279
-data = "/var/lib/heavyai/storage"
+http-port = {{IMMERSE_PORT}}
+calcite-port = {{HEAVYDB_CALCITE_PORT}}
+data = "{{HEAVY_STORAGE_DIR}}"
 null-div-by-zero = true
 enable-watchdog = false
-allowed-import-paths = "/var/lib/heavyai/import"
-allowed-export-paths = "/var/lib/heavyai/export"
+allowed-import-paths = "{{HEAVYDB_IMPORT_PATH}}"
+allowed-export-paths = "{{HEAVYDB_EXPORT_PATH}}"
 idle-session-duration = 43200
 enable-logs-system-tables = true
 enable-executor-resource-mgr=0
@@ -12,20 +12,20 @@ trivial-loop-join-threshold=1000000000
 
 [web]
 port = 6273
-servers-json = "/var/lib/heavyai/immerse/servers.json"
+servers-json = "{{IMMERSE_SERVERS_JSON}}"
 frontend = "/opt/heavyai/frontend"
 development = true
 verbose = true
-backend-url = "http://heavydb:6278"
-iq-url = "http://iq:6275"
+backend-url = "{{HEAVYDB_BACKEND_URL}}"
+iq-url = "{{IQ_URL}}"
 
 [iq]
-heavydb_host = "heavydb"
+heavydb_host = "{{HEAVYDB_SERVICE_NAME}}"
 langsmith_project = "heavyiq-demo"
 langsmith_api_key = "ls__d90b2d77ae3447c3901b5735d7ed64bb"
 heavydb_username = "admin"
 heavydb_password = "HyperInteractive"
-heavydb_port = 6274
+heavydb_port = {{HEAVYDB_PORT}}
 enable_str_literal_correction = true
 enable_debug_endpoints = false
 heavyiq_log_level = "DEBUG"
