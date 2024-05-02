@@ -1,16 +1,8 @@
-# Ports: 
-# 6273 - Immerse HTTP
-# 6274 - HeavyDB - TCP Port
-# 6275 - HeavyIQ - HTTP
-# 6278 - HeavyDB - backend http port
-# 6279 - HeavyDB - Calcite
-
-
 version: '3.8'
 
 services:
   heavydb:
-    container_name: heavyaiserver
+    container_name: heavydb
     image: docker-internal.mapd.com/mapd/mapd-render:master
     restart: always
     ipc: shareable
@@ -28,7 +20,7 @@ services:
     image: docker-internal.mapd.com/mapd/mapd-render:master
     restart: always
     ipc: shareable
-    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavy_web_server --config /var/lib/heavyai/immerse/heavy.conf'
+    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavy_web_server --config /var/lib/heavyai/immerse'
     volumes:
     - /var/lib/heavyai:/var/lib/heavyai
     networks:

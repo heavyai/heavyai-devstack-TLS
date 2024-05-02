@@ -1,0 +1,38 @@
+http-port = {{IMMERSE_PORT}}
+calcite-port = {{HEAVYDB_CALCITE_PORT}}
+data = "{{HEAVY_STORAGE_DIR}}"
+null-div-by-zero = true
+enable-watchdog = false
+allowed-import-paths = "{{HEAVYDB_IMPORT_PATH}}"
+allowed-export-paths = "{{HEAVYDB_EXPORT_PATH}}"
+idle-session-duration = 43200
+enable-logs-system-tables = true
+enable-executor-resource-mgr=0
+trivial-loop-join-threshold=1000000000
+
+[web]
+port = 6273
+servers-json = "{{IMMERSE_SERVERS_JSON}}"
+frontend = "/opt/heavyai/frontend"
+development = true
+verbose = true
+backend-url = "{{HEAVYDB_BACKEND_URL}}"
+iq-url = "{{IQ_URL}}"
+
+[iq]
+heavydb_host = "{{HEAVYDB_SERVICE_NAME}}"
+langsmith_project = "heavyiq-demo"
+langsmith_api_key = "ls__d90b2d77ae3447c3901b5735d7ed64bb"
+heavydb_username = "admin"
+heavydb_password = "HyperInteractive"
+heavydb_port = {{HEAVYDB_PORT}}
+enable_str_literal_correction = true
+enable_debug_endpoints = false
+heavyiq_log_level = "DEBUG"
+access_log_level = "DEBUG"
+custom_llm_type = "API_VLLM" # API or AZURE
+openai_api_key = ""
+custom_llm_api_base = "http://209.20.159.184:5000/v1"
+custom_llm_api_nl_to_sql_base = "http://209.20.158.0:5000/v1"
+custom_llm_api_vllm_beam_width = 2
+custom_llm_api_context_window = 16384 # context window limit
