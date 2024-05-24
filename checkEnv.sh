@@ -6,11 +6,34 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-os_packages=("docker.io" "xmlstarlet")
+os_packages=("docker-compose" "awscli" "xmlstarlet")
+docker_packages=("docker.io" "docker-ce")
 missing_packages=()
 UPDATE_DONE=0
 
 echo -e "${BLUE}Checking for required packages...${NC}"
+
+# Function to check if any of the docker packages are installed
+check_docker_installed() {
+    for package in "${docker_packages[@]}"; do
+        if dpkg -l | grep -q "^ii\s\+$package\s"; then
+            echo -e "Docker Package ($package):   [${GREEN}Installed${NC}]"
+            return 0
+        fi
+    done
+    echo -e "Docker Package:   [${RED}Not Installed${NC}]"
+    return 1
+}
+
+# Check for docker packages
+if check_docker_installed; then
+    echo -e "Docker:   [${GREEN}Installed${NC}]"
+else
+    echo -e "Docker:   [${RED}Not Installed${NC}]"
+    missing_packages+=("docker.io")  # Default to docker.io if neither is installed
+fi
+
+# Check for other required packages
 for package in "${os_packages[@]}"; do
     if dpkg -l | grep -q "^ii\s\+$package\s"; then
         echo -e "$package:   [${GREEN}Installed${NC}]"
@@ -79,6 +102,7 @@ else
         echo -e "$USER_NAME:   [${RED}Failed${NC}]"
     fi
 fi
+
 echo -e "${BLUE}Checking NVIDIA GPU ...${NC}"
 
 if command -v nvidia-smi &> /dev/null; then
