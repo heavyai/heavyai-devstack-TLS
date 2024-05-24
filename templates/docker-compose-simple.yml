@@ -6,7 +6,6 @@ services:
     image: {{CONTAINER}}
     restart: always
     ipc: shareable
-    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavydb --config {{HEAVYDB_CONFIG_LOCATION}}'
     volumes:
     - /var/lib/heavyai:/var/lib/heavyai
     networks:
