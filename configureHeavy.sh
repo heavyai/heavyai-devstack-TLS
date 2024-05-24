@@ -28,7 +28,7 @@ CONFIG_STAGING_LOCATION="./staging"
 
 HEAVYDB_CONFIG_FILE="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual path for the config
 : ${HEAVY_IQ_LOCATION:="${HEAVY_CONFIG_BASE}/iq"}
-: ${HEAVY_IQ_CONFIG_FILE:="${HEAVY_IQ_CONFIG_LOCATION}/iq.conf"}
+: ${HEAVY_IQ_CONFIG_FILE:="${HEAVY_IQ_LOCATION}/iq.conf"}
 : ${HEAVY_IMMERSE_LOCATION:="${HEAVY_CONFIG_BASE}/immerse"}
 : ${HEAVY_IMMERSE_CONFIG_FILE:="${HEAVY_IMMERSE_LOCATION}/immerse.conf"}
 
@@ -44,7 +44,7 @@ HEAVYDB_CONFIG_FILE="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual path fo
 : ${HEAVYDB_IMPORT_PATH:="${HEAVY_CONFIG_BASE}/import"}
 : ${HEAVYDB_EXPORT_PATH:="${HEAVY_CONFIG_BASE}/export"}
 
-: ${IMMERSE_SERVERS_JSON:="${HEAVY_IMMERSE_CONFIG}/servers.json"}
+: ${IMMERSE_SERVERS_JSON:="${HEAVY_IMMERSE_LOCATION}/servers.json"}
 : ${HEAVYDB_BACKEND_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYDB_BACKEND_PORT"}
 : ${IQ_URL:="http://$IQ_SERVICE_NAME:$HEAVYIQ_PORT"}
 
@@ -92,19 +92,20 @@ configureApp() {
 setupInstall(){
     echo "Setting up the installation"
     sudo mkdir $HEAVY_CONFIG_BASE #typically /var/lib/heavyai
-    chown -R $USER $HEAVY_CONFIG_BASE
+    sudo chown $USER:$USER $HEAVY_CONFIG_BASE
     mkdir -p $HEAVYDB_IMPORT_PATH
     mkdir -p $HEAVYDB_EXPORT_PATH
-    mkdir -p $HEAVY_IQ_CONFIG
-    mkdir -p $HEAVY_IMMERSE_CONFIG
+    mkdir -p $HEAVY_IQ_LOCATION
+    mkdir -p $HEAVY_IMMERSE_LOCATION
 
 }
 
 moveConfig(){
     echo "Moving the configuration files to the correct location"
     cp "$CONFIG_STAGING_LOCATION/$HEAVYDB_CONF_FILENAME" "$HEAVYDB_CONFIG_LOCATION"
+    
     cp "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME" "$HEAVY_IQ_CONFIG_LOCATION"
-    cp "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME" "$HEAVY_IMMERSE_LOCATION"
+    cp "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME" "$HEAVY_IMMERSE_CONFIG_FILE"
     cp "$CONFIG_STAGING_LOCATION/servers.json" "$IMMERSE_SERVERS_JSON"
     cp "$CONFIG_STAGING_LOCATION/docker-compose.yml" "../docker-compose.yml"
 }
@@ -114,5 +115,6 @@ configureApp "$IMMERSE_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FI
 configureApp "$HEAVYIQ_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME"
 configureApp "$DOCKER_FILE_TEMPLATE" "$CONFIG_STAGING_LOCATION/docker-compose.yml"
 configureApp "$IMMERSE_SERVERS_JSON_TEMPLATE" "$CONFIG_STAGING_LOCATION/servers.json"
+
 setupInstall
 moveConfig
