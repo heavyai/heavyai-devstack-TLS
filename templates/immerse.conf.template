@@ -2,7 +2,7 @@
 data = "{{HEAVY_IMMERSE_LOCATION}}"
 
 [web]
-port = 6273
+port = "{{IMMERSE_PORT}}"
 servers-json = "{{IMMERSE_SERVERS_JSON}}"
 frontend = "/opt/heavyai/frontend"
 development = true

@@ -8,6 +8,7 @@ else
     echo ".env file does not exist. Using defaults"
 fi
 
+
 HEAVYDB_CONF_FILENAME="heavydb.conf"
 HEAVYIQ_CONF_FILENAME="iq.conf"
 IMMERSE_CONF_FILENAME="immerse.conf"
@@ -96,25 +97,57 @@ setupInstall(){
     mkdir -p $CONFIG_STAGING_LOCATION
     mkdir -p $HEAVYDB_IMPORT_PATH
     mkdir -p $HEAVYDB_EXPORT_PATH
-    mkdir -p $HEAVY_IQ_LOCATION
-    mkdir -p $HEAVY_IMMERSE_LOCATION
+    if [ INSTALL_TYPE == "soa" ]; then
+        mkdir -p $HEAVY_IQ_LOCATION
+        mkdir -p $HEAVY_IMMERSE_LOCATION
+    fi
 
 }
 
 moveConfig(){
     echo "Moving the configuration files to the correct location"
+
     cp "$CONFIG_STAGING_LOCATION/$HEAVYDB_CONF_FILENAME" "$HEAVYDB_CONFIG_FILE"
-    cp "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME" "$HEAVY_IQ_CONFIG_FILE"
-    cp "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME" "$HEAVY_IMMERSE_CONFIG_FILE"
-    cp "$CONFIG_STAGING_LOCATION/servers.json" "$IMMERSE_SERVERS_JSON"
+
+    if [ INSTALL_TYPE == "soa" ]; then
+        cp "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME" "$HEAVY_IQ_CONFIG_FILE"
+        cp "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME" "$HEAVY_IMMERSE_CONFIG_FILE"
+        cp "$CONFIG_STAGING_LOCATION/servers.json" "$IMMERSE_SERVERS_JSON"
+    fi
+    
     cp "$CONFIG_STAGING_LOCATION/docker-compose.yml" "../docker-compose.yml"
 }
 
+
+
+# Default value for INSTALL_TYPE
+INSTALL_TYPE="simple"
+
+# Parse command-line arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -soa)
+            INSTALL_TYPE="soa"
+            shift # Remove -soa from processing
+            ;;
+        *)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
+    esac
+done
+
+# Output the chosen INSTALL_TYPE
+echo "INSTALL_TYPE is set to $INSTALL_TYPE"
+
 configureApp "$HEAVY_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$HEAVYDB_CONF_FILENAME"
-configureApp "$IMMERSE_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME"
-configureApp "$HEAVYIQ_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME"
 configureApp "$DOCKER_FILE_TEMPLATE" "$CONFIG_STAGING_LOCATION/docker-compose.yml"
 configureApp "$IMMERSE_SERVERS_JSON_TEMPLATE" "$CONFIG_STAGING_LOCATION/servers.json"
+
+if [ INSTALL_TYPE == "soa" ]; then
+    configureApp "$IMMERSE_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME"
+    configureApp "$HEAVYIQ_CONF_TEMPLATE" "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME"
+fi
 
 setupInstall
 moveConfig
