@@ -13,25 +13,13 @@ HEAVYDB_CONF_FILENAME="heavydb.conf"
 HEAVYIQ_CONF_FILENAME="iq.conf"
 IMMERSE_CONF_FILENAME="immerse.conf"
 TEMPLATE_FOLDER="./templates"
-HEAVY_CONF_TEMPLATE="$TEMPLATE_FOLDER/$HEAVYDB_CONF_FILENAME.template"
-HEAVYIQ_CONF_TEMPLATE="$TEMPLATE_FOLDER/$HEAVYIQ_CONF_FILENAME.template"
-IMMERSE_CONF_TEMPLATE="$TEMPLATE_FOLDER/$IMMERSE_CONF_FILENAME.template"
-
 IMMERSE_SERVERS_JSON_TEMPLATE="$TEMPLATE_FOLDER/servers.json"
 DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-simple.yml"
-
 HEAVYDB_SERVICE_NAME="heavydb"
 IMMERSE_SERVICE_NAME="immerse"
 IQ_SERVICE_NAME="iq"
 CONFIG_STAGING_LOCATION="./staging"
-
-: ${HEAVY_CONFIG_BASE:="/var/lib/heavyai"} #typically /var/lib/heavyai
-
-HEAVYDB_CONFIG_FILE="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual path for the config
-: ${HEAVY_IQ_LOCATION:="${HEAVY_CONFIG_BASE}/iq"}
-: ${HEAVY_IQ_CONFIG_FILE:="${HEAVY_IQ_LOCATION}/iq.conf"}
-: ${HEAVY_IMMERSE_LOCATION:="${HEAVY_CONFIG_BASE}/immerse"}
-: ${HEAVY_IMMERSE_CONFIG_FILE:="${HEAVY_IMMERSE_LOCATION}/immerse.conf"}
+: ${CONTAINER:="docker-internal.mapd.com/mapd/mapd-render:master"}
 
 : ${IMMERSE_PORT:="6273"}
 : ${HEAVYDB_PORT:="6274"}
@@ -39,17 +27,23 @@ HEAVYDB_CONFIG_FILE="${HEAVY_CONFIG_BASE}/heavy.conf"  # assuming actual path fo
 : ${HEAVYDB_BACKEND_PORT:="6278"}
 : ${HEAVYDB_CALCITE_PORT:="6279"}
 
+HEAVY_CONF_TEMPLATE="$TEMPLATE_FOLDER/$HEAVYDB_CONF_FILENAME.template"
+HEAVYIQ_CONF_TEMPLATE="$TEMPLATE_FOLDER/$HEAVYIQ_CONF_FILENAME.template"
+IMMERSE_CONF_TEMPLATE="$TEMPLATE_FOLDER/$IMMERSE_CONF_FILENAME.template"
 
-
+: ${HEAVY_CONFIG_BASE:="/var/lib/heavyai"} #typically /var/lib/heavyai
+: ${HEAVYDB_CONFIG_FILE="${HEAVY_CONFIG_BASE}/heavy.conf"}  # assuming actual path for the config
+: ${HEAVY_IQ_LOCATION:="${HEAVY_CONFIG_BASE}/iq"}
+: ${HEAVY_IQ_CONFIG_FILE:="${HEAVY_IQ_LOCATION}/iq.conf"}
+: ${HEAVY_IMMERSE_LOCATION:="${HEAVY_CONFIG_BASE}/immerse"}
+: ${HEAVY_IMMERSE_CONFIG_FILE:="${HEAVY_IMMERSE_LOCATION}/immerse.conf"}
 : ${HEAVY_STORAGE_DIR:="${HEAVY_CONFIG_BASE}/storage"}
 : ${HEAVYDB_IMPORT_PATH:="${HEAVY_CONFIG_BASE}/import"}
 : ${HEAVYDB_EXPORT_PATH:="${HEAVY_CONFIG_BASE}/export"}
-
 : ${IMMERSE_SERVERS_JSON:="${HEAVY_IMMERSE_LOCATION}/servers.json"}
 : ${HEAVYDB_BACKEND_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYDB_BACKEND_PORT"}
 : ${IQ_URL:="http://$IQ_SERVICE_NAME:$HEAVYIQ_PORT"}
 
-: ${CONTAINER:="docker-internal.mapd.com/mapd/mapd-render:master"}
 
 configureApp() {
     template_file=$1
@@ -69,24 +63,18 @@ configureApp() {
     sed -i "s|{{HEAVYIQ_PORT}}|$HEAVYIQ_PORT|g" $config_file
     sed -i "s|{{HEAVYDB_PORT}}|$HEAVYDB_PORT|g" $config_file
     sed -i "s|{{HEAVYDB_BACKEND_PORT}}|$HEAVYDB_BACKEND_PORT|g" $config_file
-
     sed -i "s|{{HEAVY_STORAGE_DIR}}|$HEAVY_STORAGE_DIR|g" "$config_file"
     sed -i "s|{{HEAVYDB_IMPORT_PATH}}|$HEAVYDB_IMPORT_PATH|g" $config_file
-    sed -i "s|{{HEAVYDB_EXPORT_PATH}}|$HEAVYDB_EXPORT_PATH|g" $config_file
-    
+    sed -i "s|{{HEAVYDB_EXPORT_PATH}}|$HEAVYDB_EXPORT_PATH|g" $config_file   
     sed -i "s|{{HEAVY_IQ_CONFIG}}|$HEAVY_IQ_CONFIG|g" $config_file
     sed -i "s|{{HEAVY_IMMERSE_CONFIG}}|$HEAVY_IMMERSE_CONFIG|g" $config_file
     sed -i "s|{{HEAVYDB_CONFIG_LOCATION}}|$HEAVYDB_CONFIG_LOCATION|g" $config_file
-
     sed -i "s|{{IMMERSE_SERVERS_JSON}}|$IMMERSE_SERVERS_JSON|g" $config_file
-
     sed -i "s|{{HEAVYDB_BACKEND_URL}}|$HEAVYDB_BACKEND_URL|g" $config_file
     sed -i "s|{{IQ_URL}}|$IQ_URL|g" $config_file
-
     sed -i "s|{{HEAVYDB_SERVICE_NAME}}|$HEAVYDB_SERVICE_NAME|g" $config_file
     sed -i "s|{{IMMERSE_SERVICE_NAME}}|$IMMERSE_SERVICE_NAME|g" $config_file
     sed -i "s|{{IQ_SERVICE_NAME}}|$IQ_SERVICE_NAME|g" $config_file
-
     sed -i "s|{{CONTAINER}}|$CONTAINER|g" $config_file
 }
 
@@ -108,14 +96,19 @@ moveConfig(){
     echo "Moving the configuration files to the correct location"
 
     cp "$CONFIG_STAGING_LOCATION/$HEAVYDB_CONF_FILENAME" "$HEAVYDB_CONFIG_FILE"
+    cp "$CONFIG_STAGING_LOCATION/docker-compose.yml" "../docker-compose.yml"
+    
+
 
     if [ INSTALL_TYPE == "soa" ]; then
         cp "$CONFIG_STAGING_LOCATION/$HEAVYIQ_CONF_FILENAME" "$HEAVY_IQ_CONFIG_FILE"
         cp "$CONFIG_STAGING_LOCATION/$IMMERSE_CONF_FILENAME" "$HEAVY_IMMERSE_CONFIG_FILE"
         cp "$CONFIG_STAGING_LOCATION/servers.json" "$IMMERSE_SERVERS_JSON"
+    else
+            cp "$CONFIG_STAGING_LOCATION/servers.json" "$HEAVY_CONFIG_BASE/servers.json"
+
     fi
     
-    cp "$CONFIG_STAGING_LOCATION/docker-compose.yml" "../docker-compose.yml"
 }
 
 
