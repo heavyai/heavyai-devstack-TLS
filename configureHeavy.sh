@@ -100,6 +100,11 @@ configureApp() {
     sed -i "s|{{IMMERSE_SERVICE_NAME}}|$IMMERSE_SERVICE_NAME|g" $config_file
     sed -i "s|{{IQ_SERVICE_NAME}}|$IQ_SERVICE_NAME|g" $config_file
     sed -i "s|{{CONTAINER}}|$CONTAINER|g" $config_file
+    sed -i "s|{{HEAVYDB_CONFIG_FILE}}|$HEAVYDB_CONFIG_FILE|g" $config_file
+    sed -i "s|{{HEAVY_IQ_CONFIG_FILE}}|$HEAVY_IQ_CONFIG_FILE|g" $config_file
+    sed -i "s|{{HEAVY_IMMERSE_CONFIG_FILE}}|$HEAVY_IMMERSE_CONFIG_FILE|g" $config_file
+    sed -i "s|{{HEAVY_IQ_LOCATION}}|$HEAVY_IQ_LOCATION|g" $config_file
+
 }
 
 setupInstall(){
