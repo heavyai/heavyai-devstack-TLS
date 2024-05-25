@@ -1,4 +1,7 @@
 # heavyai-devstack
+
+### Introducing heavyai-devstack 2.0.  The Next Generation !
+
 This latest generation of the devstack config has been redesigned to support some more robust installation options.  The most common usage of this will be for a simple docker container install on an Ubuntu22.04 host OS.  It has been tested on a few different architectures, but it may not be completely bullet proof.
 
 There are two key components:
@@ -9,7 +12,7 @@ There are two key components:
  -nvidia drivers  
  -nvidia runtime container  
  -awscli - This is optional, but often helpful
- 
+
 
  In general, if the script finds missing components, it will prompt to install them
 
