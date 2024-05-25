@@ -104,6 +104,7 @@ configureApp() {
     sed -i "s|{{HEAVY_IQ_CONFIG_FILE}}|$HEAVY_IQ_CONFIG_FILE|g" $config_file
     sed -i "s|{{HEAVY_IMMERSE_CONFIG_FILE}}|$HEAVY_IMMERSE_CONFIG_FILE|g" $config_file
     sed -i "s|{{HEAVY_IQ_LOCATION}}|$HEAVY_IQ_LOCATION|g" $config_file
+    sed -i "s|{{HEAVY_IMMERSE_LOCATION}}|$HEAVY_IMMERSE_LOCATION|g" $config_file
 
 }
 

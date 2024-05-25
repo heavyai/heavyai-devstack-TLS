@@ -1,5 +1,5 @@
 
-data = "{{HEAVY_IQ_CONFIG_LOCATION}}"
+data = "{{HEAVY_IQ_LOCATION}}"
 
 [iq]
 heavydb_host = "{{HEAVYDB_SERVICE_NAME}}"
