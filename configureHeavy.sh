@@ -101,7 +101,7 @@ configureApp() {
 
 setupInstall(){
     echo "Setting up the installation"
-    sudo mkdir $HEAVY_CONFIG_BASE #typically /var/lib/heavyai
+    sudo mkdir -p $HEAVY_CONFIG_BASE #typically /var/lib/heavyai
     sudo chown $USER:$USER $HEAVY_CONFIG_BASE
     mkdir -p $CONFIG_STAGING_LOCATION
     mkdir -p $HEAVYDB_IMPORT_PATH
