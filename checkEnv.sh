@@ -111,6 +111,7 @@ if command -v nvidia-smi &> /dev/null; then
 else
     echo -e "Nvidia Driver:   [${RED}Failed${NC}]"
     echo -e "Run nvidiaDriver1.sh to install Nvidia drivers"
+    echo -e "IMPORTANT:  It is generally required to reboot the server after the Nvidia driver install and before installing the Nvidia Docker runtime."
 fi
 
 echo -e "${BLUE}Checking NVIDIA Docker configuration...${NC}"
