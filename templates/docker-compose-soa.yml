@@ -6,7 +6,7 @@ services:
     image: {{CONTAINER}}
     restart: always
     ipc: shareable
-    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavydb --config {{HEAVYDB_CONFIG_LOCATION}}'
+    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavydb --config {{HEAVYDB_CONFIG_FILE}}'
     volumes:
     - /var/lib/heavyai:/var/lib/heavyai
     networks:
@@ -20,7 +20,7 @@ services:
     image: {{CONTAINER}}
     restart: always
     ipc: shareable
-    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavy_web_server --config {{HEAVY_IMMERSE_CONFIG}}'
+    entrypoint: /bin/bash -c '/opt/heavyai/bin/heavy_web_server --config {{HEAVY_IMMERSE_CONFIG_FILE}}'
     volumes:
     - /var/lib/heavyai:/var/lib/heavyai
     networks:
@@ -34,10 +34,10 @@ services:
     restart: no
     ipc: shareable
     environment:
-    - CONFIG_FILE={{HEAVY_IQ_CONFIG}}/heavy.conf
-    - MAPD_DATA={{HEAVY_IQ_CONFIG}}
+    - CONFIG_FILE={{HEAVY_IQ_CONFIG_FILE}}
+    - MAPD_DATA={{HEAVY_IQ_LOCATION}}
     - MAPD_HEAVYIQ_PORT={{HEAVYIQ_PORT}}
-    entrypoint: /bin/bash -c '/opt/heavyai/scripts/ee/start_heavyiq.sh'
+    entrypoint: /bin/bash -c '/opt/heavyai/scripts/ee/start_heavyiq.sh && tail -f /dev/null'
     volumes:
     - /var/lib/heavyai:/var/lib/heavyai
     networks:
