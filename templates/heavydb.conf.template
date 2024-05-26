@@ -12,7 +12,7 @@ trivial-loop-join-threshold=1000000000
 
 [web]
 port = "{{IMMERSE_PORT}}"
-servers-json = "{{IMMERSE_SERVERS_JSON}}"
+servers-json = "{{HEAVY_CONFIG_BASE}}/servers.json"
 frontend = "/opt/heavyai/frontend"
 development = true
 verbose = true
