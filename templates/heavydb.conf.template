@@ -1,4 +1,4 @@
-http-port = {{IMMERSE_PORT}}
+http-port = {{HEAVYDB_BACKEND_PORT}}
 calcite-port = {{HEAVYDB_CALCITE_PORT}}
 data = "{{HEAVY_STORAGE_DIR}}"
 null-div-by-zero = true
@@ -11,7 +11,7 @@ enable-executor-resource-mgr=0
 trivial-loop-join-threshold=1000000000
 
 [web]
-port = 6273
+port = "{{IMMERSE_PORT}}"
 servers-json = "{{IMMERSE_SERVERS_JSON}}"
 frontend = "/opt/heavyai/frontend"
 development = true
@@ -28,3 +28,4 @@ enable_str_literal_correction = true
 enable_debug_endpoints = false
 heavyiq_log_level = "DEBUG"
 access_log_level = "DEBUG"
+custom_llm_api_base = "https://api.heavy.ai/v1" # base url of API
