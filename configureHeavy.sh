@@ -117,6 +117,7 @@ setupInstall(){
     mkdir -p $HEAVYDB_EXPORT_PATH
     if [ "$INSTALL_TYPE" == "soa" ]; then
         mkdir -p $HEAVY_IQ_LOCATION
+        mkdir -p $HEAVY_IQ_LOCATION/log #this folder does not get created by the initial startup script.
         mkdir -p $HEAVY_IMMERSE_LOCATION
     fi
 
