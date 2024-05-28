@@ -83,6 +83,7 @@ configureApp() {
     
     # Using alternative delimiters for sed to handle paths with slashes
     sed -i "s|{{IMMERSE_PORT}}|$IMMERSE_PORT|g" $config_file
+    sed -i "s|{{HEAVY_CONFIG_BASE}}|$HEAVY_CONFIG_BASE|g" $config_file
     sed -i "s|{{HEAVYDB_CALCITE_PORT}}|$HEAVYDB_CALCITE_PORT|g" $config_file
     sed -i "s|{{HEAVYIQ_PORT}}|$HEAVYIQ_PORT|g" $config_file
     sed -i "s|{{HEAVYDB_PORT}}|$HEAVYDB_PORT|g" $config_file

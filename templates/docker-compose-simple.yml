@@ -4,7 +4,7 @@ services:
   heavydb:
     container_name: {{HEAVYDB_SERVICE_NAME}}
     image: {{CONTAINER}}
-    restart: always
+    restart: unless-stopped
     ipc: shareable
     volumes:
     - /var/lib/heavyai:/var/lib/heavyai

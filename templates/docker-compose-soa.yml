@@ -4,7 +4,7 @@ services:
   heavydb:
     container_name: {{HEAVYDB_SERVICE_NAME}}
     image: {{CONTAINER}}
-    restart: always
+    restart: unless-stopped
     ipc: shareable
     entrypoint: /bin/bash -c '/opt/heavyai/bin/heavydb --config {{HEAVYDB_CONFIG_FILE}}'
     volumes:
@@ -18,7 +18,7 @@ services:
   immerse:
     container_name: {{IMMERSE_SERVICE_NAME}}
     image: {{CONTAINER}}
-    restart: always
+    restart: unless-stopped
     ipc: shareable
     entrypoint: /bin/bash -c '/opt/heavyai/bin/heavy_web_server --config {{HEAVY_IMMERSE_CONFIG_FILE}}'
     volumes:
@@ -31,7 +31,7 @@ services:
   iq:
     container_name: {{IQ_SERVICE_NAME}}
     image: {{CONTAINER}}
-    restart: no
+    restart: unless-stopped
     ipc: shareable
     environment:
     - CONFIG_FILE={{HEAVY_IQ_CONFIG_FILE}}
