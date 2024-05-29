@@ -3,13 +3,4 @@ data = "{{HEAVY_IQ_LOCATION}}"
 
 [iq]
 heavydb_host = "{{HEAVYDB_SERVICE_NAME}}"
-heavydb_username = "admin"
-heavydb_password = "HyperInteractive"
 heavydb_port = {{HEAVYDB_PORT}}
-enable_str_literal_correction = true
-enable_debug_endpoints = false
-heavyiq_log_level = "DEBUG"
-access_log_level = "DEBUG"
-custom_llm_api_base = "https://api.heavy.ai/v1" # base url of API
-langsmith_project = "heavyiq-demo"
-langsmith_api_key = "ls__d90b2d77ae3447c3901b5735d7ed64bb"

@@ -7,25 +7,14 @@ allowed-import-paths = ["{{HEAVYDB_IMPORT_PATH}}"]
 allowed-export-paths = ["{{HEAVYDB_EXPORT_PATH}}"]
 idle-session-duration = 43200
 enable-logs-system-tables = true
-enable-executor-resource-mgr=0
-trivial-loop-join-threshold=1000000000
 
 [web]
 port = "{{IMMERSE_PORT}}"
 servers-json = "{{HEAVY_CONFIG_BASE}}/servers.json"
 frontend = "/opt/heavyai/frontend"
-development = true
-verbose = true
 backend-url = "{{HEAVYDB_BACKEND_URL}}"
 iq-url = "{{IQ_URL}}"
 
 [iq]
 heavydb_host = "{{HEAVYDB_SERVICE_NAME}}"
-heavydb_username = "admin"
-heavydb_password = "HyperInteractive"
 heavydb_port = {{HEAVYDB_PORT}}
-enable_str_literal_correction = true
-enable_debug_endpoints = false
-heavyiq_log_level = "DEBUG"
-access_log_level = "DEBUG"
-custom_llm_api_base = "https://api.heavy.ai/v1" # base url of API
