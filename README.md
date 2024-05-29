@@ -18,7 +18,7 @@ There are two key components:
 
 NOTE:  I have found that if you need to install Nvidia drivers, you must reboot the machine after driver install and before Nvidia Toolkit / Docker Runtime install.
 
-2. `configureHeavy` - this script will generall take the template files from the templates folder and modify them with the appropriate values specified in the top of the script.  These config files will use be copied, updated with values, and then moved to the appropriate config file location.  If desired, the values of some most of the variables in this file can also be set in a `.env` file instead of in the script itself.
+2. `configureHeavy` - this script will generally take the template files from the templates folder and modify them with the appropriate values specified in the top of the script.  These config files will use be copied, updated with values, and then moved to the appropriate config file location.  If desired, the values of some most of the variables in this file can also be set in a `.env` file instead of in the script itself.
 
 This script can take an optional parameter `configureHeavy -soa`.  This will create a more complex deployment that puts heavydb, immerse, and heavyiq each in it's own container.  It will create separate config files for each component, and an appropriate docker-compose.yml file to start all of the services.  This is an advance configuration option.
 
