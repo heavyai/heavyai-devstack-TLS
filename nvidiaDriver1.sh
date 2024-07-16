@@ -19,7 +19,7 @@ sudo apt-get install -y cuda-drivers
 install_package() {
     local package_name=$1
 
-    read -p "Do you want to install $package_name? (y/n): " response
+    read -p "If you are running on A100 you should install $package_name? (y/n): " response
     if [[ $response == "y" || $response == "Y" ]]; then
         sudo apt update
         sudo apt install -y $package_name
