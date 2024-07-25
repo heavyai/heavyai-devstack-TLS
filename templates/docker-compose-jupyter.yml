@@ -15,6 +15,13 @@ services:
     - "{{HEAVYDB_BACKEND_PORT}}:{{HEAVYDB_BACKEND_PORT}}"
     - "{{IMMERSE_PORT}}:{{IMMERSE_PORT}}"
     - "{{HEAVYIQ_PORT}}:{{HEAVYIQ_PORT}}"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
   nginx:
     image: nginx:latest
@@ -28,13 +35,13 @@ services:
       - heavy-network
 
     volumes:
-      - ./staging/nginx.conf:/etc/nginx/nginx.conf
+      - ./heavyai-devstack/templates/jupyterConfig/nginx.conf:/etc/nginx/nginx.conf
       - /var/lib/heavyai/jupyter/nginx/log:/var/log/nginx/
 
   hub:
     build:
       context: .
-      dockerfile: ./staging/Dockerfile.jupyterhub
+      dockerfile: ./heavyai-devstack/templates/jupyterConfig/Dockerfile.jupyterhub
       args:
         JUPYTERHUB_VERSION: latest
 
@@ -46,7 +53,7 @@ services:
       - heavy-network
 
     volumes:
-      - "./templates/jupyterConfig/jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro"
+      - "./heavyai-devstack/templates/jupyterConfig/jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:rw"
       - "jupyterhub-data:/data"
 
@@ -69,6 +76,6 @@ volumes:
   jupyterhub-data:
 
 networks:
-  jupyterhub-network:
+  heavy-network:
     name: heavy-network
 
