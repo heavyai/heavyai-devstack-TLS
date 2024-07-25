@@ -63,13 +63,14 @@ IMMERSE_CONF_TEMPLATE="$TEMPLATE_FOLDER/$IMMERSE_CONF_FILENAME.template"
 : ${HEAVYDB_EXPORT_PATH:="${HEAVY_CONFIG_BASE}/export"}
 : ${IMMERSE_SERVERS_JSON:="${HEAVY_IMMERSE_LOCATION}/servers.json"}
 : ${HEAVYDB_BACKEND_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYDB_BACKEND_PORT"}
-if [ "$INSTALL_TYPE" == "soa" ]; then
+if [ "$INSTALL_TYPE" == "soa" ]; then 
     : ${IQ_URL:="http://$IQ_SERVICE_NAME:$HEAVYIQ_PORT"}
     DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-soa.yml"
-else if [ "$INSTALL_TYPE" == "jupyter" ]; then
+
+elif [ "$INSTALL_TYPE" == "jupyter" ]; then 
     : ${IQ_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYIQ_PORT"}
     DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-jupyter.yml"
-else
+else 
     : ${IQ_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYIQ_PORT"}
     DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-simple.yml"
 
