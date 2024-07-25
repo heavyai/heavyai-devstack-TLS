@@ -17,6 +17,10 @@ while [[ $# -gt 0 ]]; do
             INSTALL_TYPE="soa"
             shift # Remove -soa from processing
             ;;
+        -jupyter)
+            INSTALL_TYPE="jupyter"
+            shift # Remove -jupyter from processing
+            ;;
         *)
             echo "Unknown option: $1"
             exit 1
@@ -62,7 +66,9 @@ IMMERSE_CONF_TEMPLATE="$TEMPLATE_FOLDER/$IMMERSE_CONF_FILENAME.template"
 if [ "$INSTALL_TYPE" == "soa" ]; then
     : ${IQ_URL:="http://$IQ_SERVICE_NAME:$HEAVYIQ_PORT"}
     DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-soa.yml"
-
+else if [ "$INSTALL_TYPE" == "jupyter" ]; then
+    : ${IQ_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYIQ_PORT"}
+    DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-jupyter.yml"
 else
     : ${IQ_URL:="http://$HEAVYDB_SERVICE_NAME:$HEAVYIQ_PORT"}
     DOCKER_FILE_TEMPLATE="$TEMPLATE_FOLDER/docker-compose-simple.yml"
