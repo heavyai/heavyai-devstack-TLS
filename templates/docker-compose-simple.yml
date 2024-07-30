@@ -15,7 +15,14 @@ services:
     - "{{HEAVYDB_BACKEND_PORT}}:{{HEAVYDB_BACKEND_PORT}}"
     - "{{IMMERSE_PORT}}:{{IMMERSE_PORT}}"
     - "{{HEAVYIQ_PORT}}:{{HEAVYIQ_PORT}}"
-
+    
+  deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
 networks:
   heavy-network:
