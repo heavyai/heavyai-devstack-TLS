@@ -1,21 +1,42 @@
-# !/bin/bash
-#  This script simply configurs Nvidia drivers in a typical Linux environment.  
-
+#!/bin/bash
+# This script configures Nvidia drivers and sets up the Nvidia container runtime in a typical Linux environment.
 
 nvidia_docker_runtime(){
-curl --silent --location https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
-sudo apt-key add -
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl --silent --location https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
-  sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
-sudo apt-get update
-sudo apt-get install -y nvidia-container-runtime
-sudo nvidia-ctk runtime configure --runtime=docker --set-as-default
+  # Add Nvidia Container Runtime GPG key
+  curl --silent --location https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
 
-sudo systemctl restart docker
-sudo docker run --rm --gpus all ubuntu nvidia-smi
+  # Add Nvidia Container Runtime repository
+  distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+  curl --silent --location https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+
+  # Update package lists and install Nvidia container runtime
+  sudo apt-get update
+  sudo apt-get install -y nvidia-container-runtime
+
+  # Configure Docker to use Nvidia runtime by default
+  sudo nvidia-ctk runtime configure --runtime=docker --set-as-default
+
+  # Create or update the Docker daemon.json file
+  sudo bash -c 'cat > /etc/docker/daemon.json << EOF
+{
+    "default-runtime": "nvidia",
+    "exec-opts": ["native.cgroupdriver=cgroupfs"], 
+    "runtimes": {
+        "nvidia": {
+            "args": [],
+            "path": "nvidia-container-runtime"
+        }
+    }
+}
+EOF'
+
+  # Restart Docker service to apply changes
+  sudo systemctl restart docker
+
+  # Test the Nvidia runtime with a Docker container
+  sudo docker run --rm --gpus all ubuntu nvidia-smi
 }
 
-
+# Call the function
 nvidia_docker_runtime
-
