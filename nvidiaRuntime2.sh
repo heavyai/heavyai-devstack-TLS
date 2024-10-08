@@ -25,7 +25,7 @@ nvidia_docker_toolkit(){
     "runtimes": {
         "nvidia": {
             "args": [],
-            "path": "nvidia-container-toolkit"
+            "path": "nvidia-container-runtime"
         }
     }
 }
