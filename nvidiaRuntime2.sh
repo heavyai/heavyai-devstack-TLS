@@ -1,20 +1,20 @@
 #!/bin/bash
-# This script configures Nvidia drivers and sets up the Nvidia container runtime in a typical Linux environment.
+# This script configures Nvidia drivers and sets up the Nvidia container toolkit in a typical Linux environment.
 
-nvidia_docker_runtime(){
-  # Add Nvidia Container Runtime GPG key
-  curl --silent --location https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
+nvidia_docker_toolkit(){
+  # Add Nvidia Container Toolkit GPG key
+  curl --silent --location https://nvidia.github.io/nvidia-container-toolkit/gpgkey | sudo apt-key add -
 
-  # Add Nvidia Container Runtime repository
+  # Add Nvidia Container Toolkit repository
   distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-  curl --silent --location https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+  curl --silent --location https://nvidia.github.io/nvidia-container-toolkit/$distribution/nvidia-container-toolkit.list | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
-  # Update package lists and install Nvidia container runtime
+  # Update package lists and install Nvidia container toolkit
   sudo apt-get update
-  sudo apt-get install -y nvidia-container-runtime
+  sudo apt-get install -y nvidia-container-toolkit
 
-  # Configure Docker to use Nvidia runtime by default
+  # Configure Docker to use Nvidia container toolkit by default
   sudo nvidia-ctk runtime configure --runtime=docker --set-as-default
 
   # Create or update the Docker daemon.json file
@@ -25,7 +25,7 @@ nvidia_docker_runtime(){
     "runtimes": {
         "nvidia": {
             "args": [],
-            "path": "nvidia-container-runtime"
+            "path": "nvidia-container-toolkit"
         }
     }
 }
@@ -34,9 +34,9 @@ EOF'
   # Restart Docker service to apply changes
   sudo systemctl restart docker
 
-  # Test the Nvidia runtime with a Docker container
+  # Test the Nvidia container toolkit with a Docker container
   sudo docker run --rm --gpus all ubuntu nvidia-smi
 }
 
 # Call the function
-nvidia_docker_runtime
+nvidia_docker_toolkit
