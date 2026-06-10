@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: Copyright (c) 2026, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
 # This script configures Nvidia drivers and sets up the Nvidia container toolkit in a typical Linux environment.
 
 nvidia_docker_toolkit(){
