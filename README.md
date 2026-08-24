@@ -1,6 +1,6 @@
 > [!IMPORTANT]
 >
-> As of 05/27/2026 this project has been deprecated. community-geo-demos is not maintained anymore.
+> As of 05/27/2026 this project has been deprecated. heavyai-devstack-TLS is not maintained anymore.
 
 
 # heavyai-devstack
