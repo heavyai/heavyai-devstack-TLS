@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+>
+> As of 05/27/2026 this project has been deprecated. community-geo-demos is not maintained anymore.
+
+
 # heavyai-devstack
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/heavyai/heavyai-devstack-TLS/blob/devstack2/LICENSE.txt)
 [![Security](https://img.shields.io/badge/Security-Report%20a%20Vulnerability-red.svg)](https://github.com/heavyai/heavyai-devstack-TLS/blob/devstack2/SECURITY.md)
